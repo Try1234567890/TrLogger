@@ -1,0 +1,15 @@
+Debug: false
+#Async: false
+Date:
+  Format: "yyyy-MM-dd HH;mm;ss"
+Loggers:
+  File:
+    Path: "[CP]/logs/[Config(Loggers.File.Name)].txt"
+    Name: "log-[date]"
+    MaxSize: "16Kib"
+    AtMaxSizeMoveTo: "[CP]/logs/backups/"
+    Backup:
+      Enable: true
+      Type: "Size" # Time
+      Size: "16Kib" # Time: 12h
+      Path: "[CP]/logs/backups/[Config(Loggers.File.Name)].zip"

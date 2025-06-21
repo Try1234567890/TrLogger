@@ -21,4 +21,12 @@ public class Utility {
     public static boolean isNull(File file) {
         return file == null || !file.exists();
     }
+
+    public static int getInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException _) {
+        }
+        return -1;
+    }
 }

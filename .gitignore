@@ -1,2 +1,7 @@
 # Project exclude paths
 /target/
+/src/main/test/
+/dependency-reduced-pom.xml
+/.idea
+/TrLogger.iml
+/logs
