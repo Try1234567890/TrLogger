@@ -116,9 +116,9 @@ public abstract class Placeholder {
             int start = placeholdersMatcher.start();
             int end = placeholdersMatcher.end();
             Placeholders placeholders = Placeholders.fromString(placeholdersName);
-            if (placeholders == null) {
-                throw new PlaceholderInitializationException(
-                        "No placeholder found with name:" + placeholdersName);
+            if (placeholders == null) { // Is not a placeholder
+                TrLogger.getInstance().getLogger().debug("Placeholder " + placeholdersName + " not found.");
+                continue;
             }
             Object[] params = getParams(placeholdersParams, ',');
             Function[] functions = Function.getFunctions(placeholdersFunctions);

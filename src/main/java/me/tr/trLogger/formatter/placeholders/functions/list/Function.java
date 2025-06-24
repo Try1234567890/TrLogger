@@ -65,9 +65,10 @@ public abstract class Function {
             while (functionsMatcher.find()) {
                 String functionName = functionsMatcher.group(1);
                 Functions functions = Functions.fromString(functionName);
-                if (functions == null) {
-                    throw new FunctionInitializationException(
+                if (functions == null) {// Is not a function
+                    TrLogger.getInstance().getLogger().debug(
                             "No function found with name: " + functionName);
+                    continue;
                 }
                 Object[] params = Placeholder.getParams(functionsMatcher.group(2), ',');
                 try {

@@ -4,81 +4,80 @@ import me.tr.trLogger.files.Config;
 import me.tr.trLogger.levels.Levels;
 import me.tr.trLogger.levels.TrLevel;
 
+import java.util.Collection;
+
 public abstract class Logger {
 
     protected abstract void log(String msg, TrLevel level);
 
-    public void info(String msg) {
-        log(msg, Levels.INFO.level());
-    }
-
-    public void warn(String msg) {
-        log(msg, Levels.WARN.level());
-    }
-
-    public void error(String msg) {
-        log(msg, Levels.ERROR.level());
-    }
-
-    public void debug(String msg) {
-        if (!Config.DEBUG.asBoolean())
-            return;
-        log(msg, Levels.DEBUG.level());
-    }
-
-    public void info(Exception ex, String msg) {
-        log(msg + " - " + ex.getMessage(), Levels.INFO.level());
-    }
-
-    public void warn(Exception ex, String msg) {
-        log(msg + " - " + ex.getMessage(), Levels.WARN.level());
-    }
-
-    public void error(Exception ex, String msg) {
-        log(msg + " - " + ex.getMessage(), Levels.ERROR.level());
-    }
-
-    public void debug(Exception ex, String msg) {
-        log(msg + " - " + ex.getMessage(), Levels.DEBUG.level());
-    }
-
     public void info(String... msg) {
+        if (msg == null) return;
         for (String line : msg)
-            info(line);
+            log(line, Levels.INFO.level());
     }
 
     public void warn(String... msg) {
+        if (msg == null) return;
         for (String line : msg)
-            warn(line);
+            log(line, Levels.WARN.level());
     }
 
     public void error(String... msg) {
+        if (msg == null) return;
         for (String line : msg)
-            error(line);
+            log(line, Levels.ERROR.level());
     }
 
     public void debug(String... msg) {
+        if (msg == null) return;
+        if (!Config.DEBUG.asBoolean()) return;
         for (String line : msg)
-            debug(line);
+            log(line, Levels.DEBUG.level());
     }
 
-    public void info(Exception ex, String... msg) {
+    public void info(Collection<String> msg) {
+        if (msg == null) return;
         for (String line : msg)
-            info(ex, line);
+            log(line, Levels.INFO.level());
     }
 
-    public void warn(Exception ex, String... msg) {
+    public void warn(Collection<String> msg) {
+        if (msg == null) return;
         for (String line : msg)
-            warn(ex, line);
+            log(line, Levels.WARN.level());
     }
 
-    public void error(Exception ex, String... msg) {
+    public void error(Collection<String> msg) {
+        if (msg == null) return;
         for (String line : msg)
-            error(ex, line);
+            log(line, Levels.ERROR.level());
     }
 
-    public void debug(Exception ex, String... msg) {
+    public void debug(Collection<String> msg) {
+        if (msg == null) return;
+        if (!Config.DEBUG.asBoolean()) return;
         for (String line : msg)
-            debug(ex, line);
+            log(line, Levels.DEBUG.level());
+    }
+
+    public void info(Throwable throwable, String... msg) {
+        for (String line : msg)
+            log(line + ": \n" + throwable.getMessage(), Levels.INFO.level());
+    }
+
+    public void warn(Throwable throwable, String... msg) {
+        for (String line : msg)
+            log(line + ": \n" + throwable.getMessage(), Levels.WARN.level());
+    }
+
+    public void error(Throwable throwable, String... msg) {
+        for (String line : msg)
+            log(line + ": \n" + throwable.getMessage(), Levels.ERROR.level());
+    }
+
+    public void debug(Throwable throwable, String... msg) {
+        if (!Config.DEBUG.asBoolean()) return;
+        for (String line : msg)
+            log(line + ": \n" + throwable.getMessage(), Levels.DEBUG.level());
     }
 }

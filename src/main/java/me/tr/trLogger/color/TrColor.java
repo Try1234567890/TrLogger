@@ -16,6 +16,7 @@ public class TrColor {
         if (!isHex(hex))
             throw new IllegalArgumentException("Hex " + hex + " is not valid");
         this.hex = hex;
+        this.minimessage = toMiniMessage(hex);
         this.ansi = toAnsi(hex);
         this.rgb = toRGB(hex);
         this.color = new Color(rgb[0], rgb[1], rgb[2]);
@@ -25,6 +26,7 @@ public class TrColor {
         if (!isRGB(rgb))
             throw new IllegalArgumentException("Rgb " + Arrays.toString(rgb) + " is not valid");
         this.hex = toHex(rgb);
+        this.minimessage = toMiniMessage(rgb);
         this.ansi = toAnsi(rgb);
         this.rgb = rgb;
         this.color = new Color(rgb[0], rgb[1], rgb[2]);
@@ -34,12 +36,19 @@ public class TrColor {
         if (color == null)
             throw new IllegalArgumentException("Color cannot be null");
         this.hex = toHex(color);
+        this.minimessage = toMiniMessage(color);
         this.ansi = toAnsi(color);
         this.rgb = toRGB(color);
         this.color = color;
     }
 
     // -------------- MiniMessage Separator --------------
+    public String toMiniMessage(String hex) {
+        if (!isHex(hex) || !Utility.hasMiniMessage())
+            return "";
+        return '<' + hex + '>';
+    }
+
     public String toMiniMessage(int[] rgb) {
         String hex = toHex(rgb);
         if (!isHex(hex) || !Utility.hasMiniMessage())
