@@ -14,6 +14,9 @@ public class FileLogger extends Logger {
     private BufferedWriter writer;
     private boolean keepOpen;
     private long maxSize;
+    private File moveToAtMaxSize = new File(Formatter.getInstance().format(Config.MAX_SIZE_MOVE_TO.asString()));
+    private boolean writing = false;
+
 
     public FileLogger(File file, boolean keepOpen) throws IOException {
         this.file = file;
@@ -60,9 +63,14 @@ public class FileLogger extends Logger {
 
     private void close() throws IOException {
         if (writer != null) {
-            writer.close();
-            writer = null;
-        }
+            while (true) {
+                if (!writing) {
+                    writer.close();
+                    writer = null;
+                    break;
+                }
+            }
+        } else throw new NullPointerException("Error while closing writer. Writer is null.");
     }
 
     private void change() throws IOException {
@@ -71,12 +79,12 @@ public class FileLogger extends Logger {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void move(String toStr) throws IOException {
+    private void move(File toPath) throws IOException {
         if (this.file == null) {
             return;
         }
         FileManager fm = TrLogger.getInstance().getFiles().getFileManager();
-        File to = fm.getFileFromString(toStr + "\\backup-" + file.getName());
+        File to = new File(toPath, "\\backup-" + file.getName());
         if (!to.exists()) {
             fm.createFile(to);
         }
@@ -95,15 +103,16 @@ public class FileLogger extends Logger {
     }
 
     @Override
-    protected void log(String msg, TrLevel level) {
+    public void log(String msg, TrLevel level) {
         if (writer == null) {
             return;
         }
+        writing = true;
         try {
             writer.append(Formatter.getInstance().format(level.prefix() + ' ' + msg));
             writer.flush();
             if (this.file.length() >= maxSize) {
-                move(Formatter.getInstance().format(Config.AT_MAX_SIZE_MOVE_TO.asString()));
+                move(moveToAtMaxSize);
                 return;
             }
             if (!keepOpen) {
@@ -111,6 +120,8 @@ public class FileLogger extends Logger {
             }
         } catch (IOException e) {
             TrLogger.getInstance().getLogger().error(e, "Error while writing log into " + this.file.getPath());
+        } finally {
+            writing = false;
         }
     }
 
@@ -119,11 +130,19 @@ public class FileLogger extends Logger {
     }
 
     public void setFile(File file) {
-        this.file = file;
         try {
+            this.file = file;
             change();
         } catch (IOException e) {
             TrLogger.getInstance().getLogger().error(e, "Error while writing log into " + file.getPath());
         }
+    }
+
+    public void setMaxSize(long maxSize) {
+        this.maxSize = maxSize;
+    }
+
+    public void setMoveToAtMaxSize(File moveToAtMaxSize) {
+        this.moveToAtMaxSize = moveToAtMaxSize;
     }
 }

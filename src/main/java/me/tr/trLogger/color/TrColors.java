@@ -1,6 +1,6 @@
 package me.tr.trLogger.color;
 
-public enum Colors {
+public enum TrColors {
 
     DARK_GREEN(new TrColor("#00AA00")),
     DARK_AQUA(new TrColor("#00AAAA")),
@@ -1576,7 +1576,7 @@ public enum Colors {
     ZUMTHOR(new TrColor("#edf6ff"));
     private final TrColor color;
 
-    Colors(TrColor color) {
+    TrColors(TrColor color) {
         this.color = color;
     }
 
