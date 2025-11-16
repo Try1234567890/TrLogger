@@ -1,31 +1,32 @@
-package me.tr.trLogger.levels;
+package me.tr.trlogger.levels;
 
-import me.tr.trLogger.color.TrColor;
+
+import me.tr.trformatter.strings.color.TrColor;
+import me.tr.trformatter.strings.color.TrColors;
 
 public class TrLevel {
-    private String prefix;
-    private TrColor color;
+    private final String tag;
+    private final TrColor color;
 
-    public TrLevel(String prefix, TrColor color) {
-        this.prefix = prefix;
+    public TrLevel(String tag, TrColor color) {
+        this.tag = tag;
         this.color = color;
     }
 
-    public String prefix() {
-        return prefix;
+    public TrLevel(String tag, TrColors color) {
+        this.tag = tag;
+        this.color = color.getColor();
     }
 
-    public TrLevel prefix(String prefix) {
-        this.prefix = prefix;
-        return this;
+    public String getTag() {
+        return tag;
     }
 
-    public TrColor color() {
+    public TrColor getColor() {
         return color;
     }
 
-    public TrLevel color(TrColor color) {
-        this.color = color;
-        return this;
+    public String ansi() {
+        return getColor().toANSIForeground();
     }
 }
