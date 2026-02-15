@@ -4,11 +4,11 @@ package me.tr.trlogger.levels;
 
 import me.tr.trformatter.strings.color.Colors;
 
-public class TrSolution extends TrLevel {
-    public static final TrSolution SOLUTION = new TrSolution();
+public class Solution extends Level {
+    public static final Solution SOLUTION = new Solution();
 
 
-    TrSolution() {
+    Solution() {
         super("{SOLUTION}", Colors.GREEN_YELLOW);
     }
 

@@ -3,11 +3,11 @@ package me.tr.trlogger.levels;
 
 import me.tr.trformatter.strings.color.Colors;
 
-public class TrMessage extends TrLevel {
-    public static final TrMessage MESSAGE = new TrMessage();
+public class Message extends Level {
+    public static final Message MESSAGE = new Message();
 
 
-    TrMessage() {
+    Message() {
         super("{MESSAGE}", Colors.ALBESCENT_WHITE);
     }
 

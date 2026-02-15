@@ -4,16 +4,16 @@ package me.tr.trlogger.levels;
 import me.tr.trformatter.strings.color.Color;
 import me.tr.trformatter.strings.color.Colors;
 
-public class TrLevel {
+public class Level {
     private final String tag;
     private final Color color;
 
-    public TrLevel(String tag, Color color) {
+    public Level(String tag, Color color) {
         this.tag = tag;
         this.color = color;
     }
 
-    public TrLevel(String tag, Colors color) {
+    public Level(String tag, Colors color) {
         this.tag = tag;
         this.color = color.getColor();
     }

@@ -3,85 +3,86 @@ package me.tr.trlogger.loggers;
 import me.tr.trformatter.TrFormatterAPI;
 import me.tr.trformatter.strings.color.ansi.ANSI;
 import me.tr.trlogger.levels.*;
+import me.tr.trlogger.levels.Error;
 
-public abstract class TrLogger {
+public abstract class Logger {
     private boolean debug;
 
-    public abstract void log(String msg, TrLevel level);
+    public abstract void log(String msg, Level level);
 
     public void info(String msg) {
-        log(msg, TrInfo.INFO);
+        log(msg, Info.INFO);
     }
 
     public void warn(String msg) {
-        log(msg, TrWarn.WARN);
+        log(msg, Warn.WARN);
     }
 
     public void error(String msg) {
-        log(msg, TrError.ERROR);
+        log(msg, Error.ERROR);
     }
 
     public void debug(String msg) {
         if (!isDebug())
             return;
-        log(msg, TrDebug.DEBUG);
+        log(msg, Debug.DEBUG);
     }
 
     public void info(String... msgs) {
-        for (String msg : msgs) log(msg, TrInfo.INFO);
+        for (String msg : msgs) log(msg, Info.INFO);
     }
 
     public void warn(String... msgs) {
-        for (String msg : msgs) log(msg, TrWarn.WARN);
+        for (String msg : msgs) log(msg, Warn.WARN);
     }
 
     public void error(String... msgs) {
-        for (String msg : msgs) log(msg, TrError.ERROR);
+        for (String msg : msgs) log(msg, Error.ERROR);
     }
 
     public void debug(String... msgs) {
         if (!isDebug())
             return;
-        for (String msg : msgs) log(msg, TrDebug.DEBUG);
+        for (String msg : msgs) log(msg, Debug.DEBUG);
     }
 
     public void info(Throwable t, String msg) {
-        log(t + " - " + msg, TrInfo.INFO);
+        log(t + " - " + msg, Info.INFO);
     }
 
     public void warn(Throwable t, String msg) {
-        log(t + " - " + msg, TrWarn.WARN);
+        log(t + " - " + msg, Warn.WARN);
     }
 
     public void error(Throwable t, String msg) {
-        log(t + " - " + msg, TrError.ERROR);
+        log(t + " - " + msg, Error.ERROR);
     }
 
     public void debug(Throwable t, String msg) {
         if (!isDebug())
             return;
-        log(t + " - " + msg, TrDebug.DEBUG);
+        log(t + " - " + msg, Debug.DEBUG);
     }
 
     public void info(Throwable t, String... msgs) {
-        for (String msg : msgs) log(t + " - " + msg, TrInfo.INFO);
+        for (String msg : msgs) log(t + " - " + msg, Info.INFO);
     }
 
     public void warn(Throwable t, String... msgs) {
-        for (String msg : msgs) log(t + " - " + msg, TrWarn.WARN);
+        for (String msg : msgs) log(t + " - " + msg, Warn.WARN);
     }
 
     public void error(Throwable t, String... msgs) {
-        for (String msg : msgs) log(t + " - " + msg, TrError.ERROR);
+        for (String msg : msgs) log(t + " - " + msg, Error.ERROR);
     }
 
     public void debug(Throwable t, String... msgs) {
         if (!isDebug())
             return;
-        for (String msg : msgs) log(t + " - " + msg, TrDebug.DEBUG);
+        for (String msg : msgs) log(t + " - " + msg, Debug.DEBUG);
     }
 
-    protected String compose(String msg, TrLevel level) {
+    protected String compose(String msg, Level level) {
         return TrFormatterAPI.format(level.ansi() + level.getTag() + " " + msg + ANSI.RESET_TAG + "\n");
     }
 

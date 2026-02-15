@@ -4,11 +4,11 @@ package me.tr.trlogger.levels;
 
 import me.tr.trformatter.strings.color.Colors;
 
-public class TrWarn extends TrLevel {
-    public static final TrWarn WARN = new TrWarn();
+public class Warn extends Level {
+    public static final Warn WARN = new Warn();
 
 
-    TrWarn() {
+    Warn() {
         super("{WARN}", Colors.ENERGY_YELLOW);
     }
 
