@@ -1,19 +1,19 @@
 package me.tr.trlogger.levels;
 
 
-import me.tr.trformatter.strings.color.TrColor;
-import me.tr.trformatter.strings.color.TrColors;
+import me.tr.trformatter.strings.color.Color;
+import me.tr.trformatter.strings.color.Colors;
 
 public class TrLevel {
     private final String tag;
-    private final TrColor color;
+    private final Color color;
 
-    public TrLevel(String tag, TrColor color) {
+    public TrLevel(String tag, Color color) {
         this.tag = tag;
         this.color = color;
     }
 
-    public TrLevel(String tag, TrColors color) {
+    public TrLevel(String tag, Colors color) {
         this.tag = tag;
         this.color = color.getColor();
     }
@@ -22,11 +22,11 @@ public class TrLevel {
         return tag;
     }
 
-    public TrColor getColor() {
+    public Color getColor() {
         return color;
     }
 
     public String ansi() {
-        return getColor().toANSIForeground();
+        return getColor().getANSI24Bit().getTextEscapeSequence();
     }
 }
