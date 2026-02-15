@@ -1,6 +1,7 @@
 package me.tr.trlogger.loggers;
 
-import me.tr.trformatter.TrFormatter;
+import me.tr.trformatter.TrFormatterAPI;
+import me.tr.trformatter.strings.color.ansi.ANSI;
 import me.tr.trlogger.levels.*;
 
 public abstract class TrLogger {
@@ -81,7 +82,7 @@ public abstract class TrLogger {
     }
 
     protected String compose(String msg, TrLevel level) {
-        return TrFormatter.resolvePlaceholders(level.ansi() + level.getTag() + " " + msg + "\n");
+        return TrFormatterAPI.format(level.ansi() + level.getTag() + " " + msg + ANSI.RESET_TAG + "\n");
     }
 
     public void setDebug(boolean debug) {

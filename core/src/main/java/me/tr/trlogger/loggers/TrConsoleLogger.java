@@ -1,8 +1,8 @@
 package me.tr.trlogger.loggers;
 
-import me.tr.trformatter.TrValidator;
+
+import me.tr.trformatter.utility.Validator;
 import me.tr.trlogger.levels.TrLevel;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,8 +10,8 @@ import java.io.OutputStream;
 public class TrConsoleLogger extends TrLogger {
     private final OutputStream out;
 
-    public TrConsoleLogger(@NotNull OutputStream out) {
-        TrValidator.isNull(out, "The output stream is null");
+    public TrConsoleLogger(OutputStream out) {
+        Validator.isNull(out, "The output stream is null");
         this.out = out;
     }
 
