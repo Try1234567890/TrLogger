@@ -1,16 +1,17 @@
-//file:noinspection GroovyAssignabilityCheck
 plugins {
     id 'java-library'
     id 'maven-publish'
 }
 
-group = 'me.tr'
-version = '2.2.3'
 
 publishing {
     publications {
         mavenLocal(MavenPublication) {
             from components['java']
+
+            group = 'me.tr.logger'
+            artifactId = 'core'
+            version = '2.2.3'
         }
     }
 }
