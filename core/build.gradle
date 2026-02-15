@@ -9,8 +9,8 @@ publishing {
         mavenLocal(MavenPublication) {
             from components['java']
 
-            group = 'me.tr.logger'
-            artifactId = 'core'
+            group = 'me.tr.trlogger'
+            artifactId = 'logger'
             version = '2.2.3'
         }
     }
