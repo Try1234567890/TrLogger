@@ -1,11 +1,11 @@
 # Project exclude paths
 /target/
-/core/src/main/test/
+/logger/src/main/test/
 /dependency-reduced-pom.xml
 /.idea
 /TrLogger.iml
 /logs
-/core/src/main/resources/
+/logger/src/main/resources/
 # Ignore Gradle project-specific cache directory
 .gradle
 

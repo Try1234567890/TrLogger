@@ -1,0 +1,35 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'com.gradleup.shadow' version '9.3.1'
+}
+
+group = 'me.tr'
+version = '0.0.1'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url = "https://repo.papermc.io/repository/maven-public/" }
+}
+publishing {
+    publications {
+        mavenLocal(MavenPublication) {
+            from components.shadow
+
+            groupId = 'me.tr.logger'
+            artifactId = 'paperjavafx'
+            version = '0.0.1'
+        }
+    }
+}
+
+
+shadowJar {
+    archiveClassifier.set('')
+}
+
+dependencies {
+    implementation("me.tr.trlogger:logger:2.2.4")
+    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+}

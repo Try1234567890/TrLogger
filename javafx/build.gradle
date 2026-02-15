@@ -10,22 +10,45 @@ publishing {
     publications {
         mavenLocal(MavenPublication) {
             from components.shadow
-            artifactId = 'formatter'
 
-            groupId = 'me.tr'
-            version = '3.2.1'
+            groupId = 'me.tr.logger'
+            artifactId = 'javafx'
+            version = '0.0.1'
         }
     }
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
+
+javafx {
+    version = '21.0.6'
+    modules = ['javafx.controls']
+}
+
 dependencies {
-    implementation("me.tr.trlogger:logger:2.2.3")
+    implementation("me.tr.trlogger:logger:2.2.4")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+test {
+    useJUnitPlatform()
+    jvmArgs += [
+            '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+            '--add-opens', 'javafx.graphics/com.sun.glass.ui=ALL-UNNAMED'
+    ]
 }
 
 shadowJar {
     archiveClassifier.set('')
+
+    dependencies {
+        exclude(dependency('org.openjfx:.*:.*'))
+    }
 }
