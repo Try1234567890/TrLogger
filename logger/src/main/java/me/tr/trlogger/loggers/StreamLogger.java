@@ -7,15 +7,15 @@ import me.tr.trlogger.levels.Level;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class ConsoleLogger extends Logger {
+public class StreamLogger extends Logger {
     private final OutputStream out;
 
-    public ConsoleLogger(OutputStream out) {
+    public StreamLogger(OutputStream out) {
         Validator.isNull(out, "The output stream is null");
         this.out = out;
     }
 
-    public ConsoleLogger() {
+    public StreamLogger() {
         this.out = System.out;
     }
 
