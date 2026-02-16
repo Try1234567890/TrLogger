@@ -19,7 +19,7 @@ publishing {
         mavenLocal(MavenPublication) {
             from components.shadow
 
-            groupId = 'me.tr.logger'
+            groupId = 'me.tr.trlogger'
             artifactId = 'spigot'
             version = '0.0.1'
         }

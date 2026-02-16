@@ -17,8 +17,8 @@ publishing {
         mavenLocal(MavenPublication) {
             from components.shadow
 
-            groupId = 'me.tr.logger'
-            artifactId = 'paperjavafx'
+            groupId = 'me.tr.trlogger'
+            artifactId = 'paper'
             version = '0.0.1'
         }
     }
