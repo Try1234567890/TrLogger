@@ -1,7 +1,7 @@
 package me.tr.trlogger.loggers;
 
 import me.tr.trformatter.TrFormatterAPI;
-import me.tr.trformatter.strings.color.ansi.ANSI;
+import me.tr.trformatter.color.ansi.ANSI;
 import me.tr.trformatter.utility.Validator;
 import me.tr.trlogger.levels.*;
 import me.tr.trlogger.levels.Error;
